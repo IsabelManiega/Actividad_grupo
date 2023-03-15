@@ -52,6 +52,11 @@ async def delete_one():
     pass
 
 # TODO: Eliminar todos los datos: DELETE
-@app.delete()
-async def delete_all():
-    pass
+@app.delete("/")
+async def delete_all()
+    if not database:
+        raise HTTPexception(status_code=404, detail="No hay usuarios")
+    
+    database.clear()
+    return "Todos los usuarios fueron eliminados"
+pass
