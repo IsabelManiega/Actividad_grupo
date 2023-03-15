@@ -1,5 +1,5 @@
 # Crear una Api rest
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPexception
 
 tags_metadata=[
     {
@@ -52,6 +52,11 @@ async def delete_one():
     pass
 
 # TODO: Eliminar todos los datos: DELETE
-@app.delete()
+@app.delete("/")
 async def delete_all():
-    pass
+    if not database:
+        raise HTTPexception(status_code=404, detail="No hay usuarios")
+    
+    database.clear()
+    return "Todos los usuarios fueron eliminados"
+
