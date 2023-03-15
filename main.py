@@ -59,4 +59,4 @@ async def delete_all():
     
     database.clear()
     return "Todos los usuarios fueron eliminados"
-pass
+
