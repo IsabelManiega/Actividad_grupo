@@ -27,13 +27,31 @@ database = [{"id": 1, "name": "Juan Perez", "age": 25, "profesion": "Ingeniero"}
             {"id": 2, "name": "Susana Ruiz", "age": 45, "profesion": "Profesora"}]
 
 # TODO: Mostrar el listado: GET
+@app.get()
+async def show():
+    pass
 
 # TODO: Mostrar un dato en concreto: GET
+@app.get()
+async def show_one():
+    pass
 
 # TODO:Insertar un dato en es listado: POST
+@app.post()
+async def insert():
+    pass
 
 # TODO:Actualizaréis un dato del listado: PUT
+@app.put()
+async def update():
+    pass
 
 # TODO:Eliminareis un dato: DELETE
+@app.delete()
+async def delete_one():
+    pass
 
 # TODO: Eliminar todos los datos: DELETE
+@app.delete()
+async def delete_all():
+    pass
