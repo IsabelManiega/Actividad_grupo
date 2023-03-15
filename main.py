@@ -1,14 +1,18 @@
 # Crear una Api rest
-from fastapi import FastAPI, HTTPexception
+from fastapi import FastAPI, Response
+import json
 
 tags_metadata=[
     {
-        "name": "TEST",
+        "name": "Test",
         "description": "Bienvenida",
+        
+        
+        
     },
     {
         "name": "Users",
-        "description": "Muestra los gestión de los usuarios",
+        "description": "Muestra la gestión de los usuarios",
     },
 ]
 
@@ -26,37 +30,20 @@ app = FastAPI(title="DataScience Course",
 database = [{"id": 1, "name": "Juan Perez", "age": 25, "profesion": "Ingeniero"},
             {"id": 2, "name": "Susana Ruiz", "age": 45, "profesion": "Profesora"}]
 
+@app.get('/TEST/', tags=["Test"])
+async def TEST():
+    return "Bienvenido al ejercicio de Datos personales"
+
 # TODO: Mostrar el listado: GET
-@app.get()
-async def show():
-    pass
-
-# TODO: Mostrar un dato en concreto: GET
-@app.get()
-async def show_one():
-    pass
-
-# TODO:Insertar un dato en es listado: POST
-@app.post()
-async def insert():
-    pass
-
-# TODO:Actualizaréis un dato del listado: PUT
-@app.put()
-async def update():
-    pass
-
-# TODO:Eliminareis un dato: DELETE
-@app.delete()
-async def delete_one():
-    pass
-
-# TODO: Eliminar todos los datos: DELETE
-@app.delete("/")
-async def delete_all():
-    if not database:
-        raise HTTPexception(status_code=404, detail="No hay usuarios")
+@app.get('/datospersonales/', tags=["Users"])
+async def datospersonales(response:Response):
+    try:
+        database1=database
+        return(database1)
     
-    database.clear()
-    return "Todos los usuarios fueron eliminados"
+    except Exception as e:
+        print("Error al cargar la informacion" % str(e))
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return "404 NOT FOUND"   
+
 
