@@ -1,8 +1,8 @@
 from pydantic import BaseModel
 
 # TODO: insertar el modelo de datos
-class User(BaseModel):
-    "id": float  # no estoy segura si se pone o se obtiene automaticamente
+class Person(BaseModel):
+    "id": int
     "name": str
-    "age": float
+    "age": int
     "profesion": str
