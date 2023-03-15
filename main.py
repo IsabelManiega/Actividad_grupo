@@ -44,14 +44,14 @@ async def insert():
     pass
 """
 # TODO:Actualizaréis un dato del listado: PUT
-@app.put("/")
+@app.put("/updateData/")
 async def update(item:Person):
-    df=pd.read("/database/")
+    df=pd.database
     df.loc[df.index[-1], "id"] = item.id
     df.loc[df.index[-1], "name"] = item.name
     df.loc[df.index[-1], "age"] = item.age
     df.loc[df.index[-1], "profesion"] = item.profesion
-    df.to_csv("/database/", index=False)
+    df.to_csv("updateData", index=False)
     retur (**item.dic())
 """
 # TODO:Eliminareis un dato: DELETE
