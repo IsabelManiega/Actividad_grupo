@@ -1,5 +1,5 @@
 # Crear una Api rest
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPexception
 
 tags_metadata=[
     {
@@ -52,7 +52,6 @@ async def delete_one():
     pass
 
 # TODO: Eliminar todos los datos: DELETE
-from fastapi import HTTPexception
 @app.delete("/")
 async def delete_all():
     if not database:
