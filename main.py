@@ -1,6 +1,6 @@
 # Crear una Api rest
 from fastapi import FastAPI, HTTPexception
-
+from models import User 
 tags_metadata=[
     {
         "name": "TEST",
@@ -37,8 +37,14 @@ async def show_one():
     pass
 
 # TODO:Insertar un dato en es listado: POST
-@app.post()
-async def insert():
+@app.post("/insertData/")
+async def insert(item:User):
+
+    nuevo_usuario = item.dict()
+    nuevo_usuario["id"] = len(database) + 1
+    database.append(nuevo_usuario)
+    return nuevo_usuario
+    
     pass
 
 # TODO:Actualizaréis un dato del listado: PUT
