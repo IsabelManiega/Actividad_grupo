@@ -52,8 +52,9 @@ async def delete_one():
     pass
 
 # TODO: Eliminar todos los datos: DELETE
+from fastapi import HTTPexception
 @app.delete("/")
-async def delete_all()
+async def delete_all():
     if not database:
         raise HTTPexception(status_code=404, detail="No hay usuarios")
     
