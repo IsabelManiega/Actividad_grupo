@@ -1,15 +1,18 @@
 # Crear una Api rest
-from fastapi import FastAPI, HTTPException
-from models import Person 
+from fastapi import FastAPI, HTTPException, Response, status
+from models import Person
 
 tags_metadata=[
     {
-        "name": "TEST",
+        "name": "Test",
         "description": "Bienvenida",
+        
+        
+        
     },
     {
         "name": "Users",
-        "description": "Muestra los gestión de los usuarios",
+        "description": "Muestra la gestión de los usuarios",
     },
 ]
 
@@ -27,15 +30,21 @@ app = FastAPI(title="DataScience Course",
 database = [{"id": 1, "name": "Juan Perez", "age": 25, "profesion": "Ingeniero"},
             {"id": 2, "name": "Susana Ruiz", "age": 45, "profesion": "Profesora"}]
 
-# TODO: Mostrar el listado: GET
-@app.get('')
-async def show():
-    pass
+@app.get('/TEST/', tags=["Test"])
+async def TEST():
+    return "Bienvenido al ejercicio de Datos personales"
 
-# TODO: Mostrar un dato en concreto: GET
-@app.get('')
-async def show_one():
-    pass
+
+@app.get('/datospersonales/', tags=["Users"])
+async def datospersonales(response:Response):
+    try:
+        database1=database
+        return(database1)
+    
+    except Exception as e:
+        print("Error al cargar la informacion" % str(e))
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return "404 NOT FOUND"   
 
 @app.post("/insertData/")
 async def insert(item:Person):
@@ -46,7 +55,15 @@ async def insert(item:Person):
     return nuevo_usuario
 
 
-# TODO:Actualizaréis un dato del listado: PUT
+@app.post("/insertData/")
+async def insert(item:Person):
+
+    nuevo_usuario = item.dict()
+    nuevo_usuario["id"] = len(database) + 1
+    database.append(nuevo_usuario)
+    return nuevo_usuario
+
+
 @app.put("/updateData/")
 async def update(item:Person):
     df= pd.database
