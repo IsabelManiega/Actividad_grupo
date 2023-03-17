@@ -1,6 +1,7 @@
 # Crear una Api rest
 from fastapi import FastAPI, HTTPException
 from models import Person 
+
 tags_metadata=[
     {
         "name": "TEST",
@@ -36,7 +37,6 @@ async def show():
 async def show_one():
     pass
 
-# TODO:Insertar un dato en es listado: POST
 @app.post("/insertData/")
 async def insert(item:Person):
 
@@ -47,16 +47,23 @@ async def insert(item:Person):
 
 
 # TODO:Actualizaréis un dato del listado: PUT
-@app.put('')
-async def update():
-    pass
+@app.put("/updateData/")
+async def update(item:Person):
+    df= pd.database
+    df.loc[df.index[-1], "id"] = item.id
+    df.loc[df.index[-1], "name"] = item.name
+    df.loc[df.index[-1], "age"] = item.age
+    df.loc[df.index[-1], "profesion"] = item.profesion
+    df.to_csv("updateData", index=False)
+    return {**item.dic()}
+            
 
 # TODO:Eliminareis un dato: DELETE
 @app.delete('')
 async def delete_one():
     pass
 
-# TODO: Eliminar todos los datos: DELETE
+
 @app.delete("/")
 async def delete_all():
     if not database:
@@ -64,4 +71,3 @@ async def delete_all():
     
     database.clear()
     return "Todos los usuarios fueron eliminados"
-
