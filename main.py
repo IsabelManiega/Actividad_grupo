@@ -1,6 +1,7 @@
 # Crear una Api rest
-from fastapi import FastAPI
-from models import Person
+from fastapi import FastAPI, HTTPException
+from models import Person 
+
 tags_metadata=[
     {
         "name": "TEST",
@@ -26,40 +27,42 @@ app = FastAPI(title="DataScience Course",
 database = [{"id": 1, "name": "Juan Perez", "age": 25, "profesion": "Ingeniero"},
             {"id": 2, "name": "Susana Ruiz", "age": 45, "profesion": "Profesora"}]
 
-"""
 # TODO: Mostrar el listado: GET
-@app.get()
+@app.get('')
 async def show():
     pass
 
 # TODO: Mostrar un dato en concreto: GET
-@app.get()
+@app.get('')
 async def show_one():
     pass
 
+@app.post("/insertData/")
+async def insert(item:Person):
 
-# TODO:Insertar un dato en es listado: POST
-@app.post()
-async def insert():
-    pass
-"""
+    nuevo_usuario = item.dict()
+    nuevo_usuario["id"] = len(database) + 1
+    database.append(nuevo_usuario)
+    return nuevo_usuario
+
 # TODO:Actualizaréis un dato del listado: PUT
 @app.put("/updateData/")
 async def update(item:Person):
-    df=pd.database
+    df= pd.database
     df.loc[df.index[-1], "id"] = item.id
     df.loc[df.index[-1], "name"] = item.name
     df.loc[df.index[-1], "age"] = item.age
     df.loc[df.index[-1], "profesion"] = item.profesion
     df.to_csv("updateData", index=False)
-    retur (**item.dic())
-"""
+    return {**item.dic()}
+            
+
 # TODO:Eliminareis un dato: DELETE
-@app.delete()
+@app.delete('')
 async def delete_one():
     pass
 
-# TODO: Eliminar todos los datos: DELETE
+
 @app.delete("/")
 async def delete_all():
     if not database:
@@ -67,5 +70,3 @@ async def delete_all():
     
     database.clear()
     return "Todos los usuarios fueron eliminados"
-
-"""
