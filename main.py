@@ -1,6 +1,7 @@
 # Crear una Api rest
 from fastapi import FastAPI, HTTPException, Response, status
 from models import Person
+import pandas as pd
 
 tags_metadata=[
     {
