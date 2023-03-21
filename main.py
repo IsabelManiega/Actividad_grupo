@@ -73,7 +73,7 @@ async def delete_one():
     pass
 
 
-@app.delete("/")
+@app.delete("/", tags=["Users]"])
 async def delete_all():
     if not database:
         raise HTTPException(status_code=404, detail="No hay usuarios")
