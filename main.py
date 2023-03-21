@@ -56,15 +56,6 @@ async def insert(item:Person):
     return nuevo_usuario
 
 
-@app.post("/insertData/")
-async def insert(item:Person):
-
-    nuevo_usuario = item.dict()
-    nuevo_usuario["id"] = len(database) + 1
-    database.append(nuevo_usuario)
-    return nuevo_usuario
-
-
 @app.put("/updateData/")
 async def update(item:Person):
     df= pd.database
