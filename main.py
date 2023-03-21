@@ -46,12 +46,13 @@ async def datospersonales(response:Response):
         response.status_code = status.HTTP_404_NOT_FOUND
         return "404 NOT FOUND"   
 
-@app.post("/insertData/")
+@app.post("/insertData/", status_code=201)
 async def insert(item:Person):
 
     nuevo_usuario = item.dict()
     nuevo_usuario["id"] = len(database) + 1
     database.append(nuevo_usuario)
+    
     return nuevo_usuario
 
 
