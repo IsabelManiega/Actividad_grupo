@@ -46,7 +46,7 @@ async def datospersonales(response:Response):
         response.status_code = status.HTTP_404_NOT_FOUND
         return "404 NOT FOUND"   
 
-@app.post("/insertData/", status_code=201)
+@app.post("/insertData/", tags=["Users"], status_code=201)
 async def insert(item:Person):
 
     nuevo_usuario = item.dict()
