@@ -39,8 +39,7 @@ async def TEST():
 @app.get('/datospersonales/', tags=["Users"])
 async def datospersonales(response:Response):
     try:
-        database1=database
-        return(database1)
+        return database
     
     except Exception as e:
         print("Error al cargar la informacion" % str(e))
