@@ -36,7 +36,8 @@ async def TEST():
     return "Bienvenido al ejercicio de Datos personales"
 
 
-@app.get('/datospersonales/', tags=["Users"])
+@app.get('/datospersonales/', tags=["Users"],
+         description="Muestra todos los usuarios disponibles")
 async def datospersonales(response:Response):
     try:
         return database
@@ -46,7 +47,8 @@ async def datospersonales(response:Response):
         response.status_code = status.HTTP_404_NOT_FOUND
         return "404 NOT FOUND"   
 
-@app.post("/insertData/", tags=["Users"], status_code=201)
+@app.post("/insertData/", tags=["Users"], status_code=201,
+          description="Insertar un nuevo usuario")
 async def insert(item:Person):
 
     nuevo_usuario = item.dict()
