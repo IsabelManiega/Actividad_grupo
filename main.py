@@ -57,19 +57,15 @@ async def insert(item:Person):
 
 
 @app.put("/updateData/{item_id}", tags=["Users"])
-async def update(item_id: int, item: Person):
-    try:
-        for value in database:
-            if value['id'] == item_id:
-                value['name'] == item.name
-                value['age'] == item.age
-                value['profesion'] == item.profesion
-        return {item_id:int , **item.dic()}
-    except:
-        print("Error ID no Válido" % str(e))
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return "404 NOT FOUND"
-
+async def update(item_id: int, item: Person, response: Response):
+    for i in range(0, len(database)):
+        if database[i]['id'] == item_id:
+            database[i]['name'] = item.name
+            database[i]['age'] = item.age
+            database[i]['profesion'] = item.profesion                          
+            return {"item_id": item_id, **item.dict()}
+    response.status_code = status.HTTP_404_NOT_FOUND
+    return "404 NOT FOUND"
             
 
 # TODO:Eliminareis un dato: DELETE
