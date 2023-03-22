@@ -68,10 +68,15 @@ async def update(item_id: int, item: Person, response: Response):
     return "404 NOT FOUND"
             
 
-# TODO:Eliminareis un dato: DELETE
-@app.delete('')
-async def delete_one():
-    pass
+@app.delete('/deleteOne/{id}', tags=["Users"])
+async def delete_one(id:int, response: Response):
+    for value in database:
+        if value['id'] == id:
+            database.remove(value)
+            response.status_code = status.HTTP_204_NO_CONTENT
+            return {"item_id": id, "msg": "Eliminado"}
+    response.status_code = status.HTTP_404_NOT_FOUND
+    return {"item_id": id, "msg": "User not Found"}
 
 
 @app.delete("/", tags=["Users]"])
