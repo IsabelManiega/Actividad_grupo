@@ -79,7 +79,7 @@ async def delete_one(id:int, response: Response):
     return {"item_id": id, "msg": "User not Found"}
 
 
-@app.delete("/", tags=["Users]"])
+@app.delete("/delete/", tags=["Users"])
 async def delete_all():
     if not database:
         raise HTTPException(status_code=404, detail="No hay usuarios")
